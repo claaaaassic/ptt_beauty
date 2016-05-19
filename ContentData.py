@@ -7,8 +7,8 @@ class ContentData:
 	def __init__(self, _content, _id):
 		self.content = _content
 		self.id = _id
-		self.urlList = list()
 		self.title = ''
+	
 	
 		# 尋找標題 ## patton 還沒有打得很完美
 	def title(self):
@@ -30,9 +30,14 @@ class ContentData:
 	    return self.page
 
 
+	    # 翻頁後文章內容新增進 content
+	def addContent(self, contents):
+		self.content = self.content + contents
+
+
 		# 尋找可下載的 url 紀錄格式為 list
-	def searchUrl(self, contents):
-		self.urlList = self.urlList + re.findall('http://i?\.?imgur.com/[a-zA-Z0-9]+', contents)
+	def searchUrl(self):
+		return re.findall('http://i?\.?imgur.com/[a-zA-Z0-9]{6,8}',self.content)
 
 
 		# 去除怪異字元 # *[1;33m 這類的格式還沒做處理
